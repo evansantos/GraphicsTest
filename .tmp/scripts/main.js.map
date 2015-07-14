@@ -1,0 +1,1 @@
+{"version":3,"sources":["app/scripts/main.js"],"names":[],"mappings":";;;;;AAGA,IAAI,KAAK,GAAG,GAAG;IAAE,MAAM,GAAG,GAAG,CAAC","file":"app/scripts/main.js","sourcesContent":["// jshint devel:true\n// D3.JS Chart\n\nvar width = 640, height = 480; // Measures for graph\n"]}
