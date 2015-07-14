@@ -20,6 +20,40 @@
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
+<!--     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="bower_components/google-chart/google-chart.html"> -->
+
+
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var jsonData = $.ajax({
+          url: "data-monthly.json",
+          dataType:"json",
+          async: false
+          }).responseText;
+
+      // Create our data table out of JSON data loaded from server.
+      var data = new google.visualization.DataTable(jsonData);
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, {width: 400, height: 240});
+    }
+
+    </script>
+
+
 
   </head>
   <body>
@@ -38,10 +72,42 @@
         <h3 class="text-muted">Graphs</h3>
       </div>
 
-      <div class="content">
-        <div id="ggCharts" style="width: 900px; height: 300px;"></div>
-      </div>
+        <style>
+    /* Phone and tablet */
+    #resizing_chart {
+      height: 300px;
+      width: 400px;
+    }
 
+    /* Desktop */
+    @media screen and (min-width: 1024px) {
+      #resizing_chart {
+        width: 800px;
+      }
+    }
+  </style>
+
+  <script>
+    var media = window.matchMedia('(min-width: 1024px)');
+
+    media.addListener(function() {
+      document.getElementById('resizing_chart').drawChart();
+    });
+  </script>
+
+    <div id="resizing_chart"></div>
+
+    <div id="chart_div"></div>
+
+<!--   <google-chart
+    id='resizing_chart'
+    type='column'
+    options='{"title": "Responsive chart",
+              "vAxis": {"minValue" : 0, "maxValue": 10}}'
+    cols='[{"label": "Data", "type": "string"},{"label": "Value", "type": "number"}]'
+    rows='[["Col1", 5.0],["Col2", 5.0],["Col3", 5.0]]'>
+  </google-chart>
+ -->
 
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
@@ -70,12 +136,12 @@
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
-    <script src="/bower_components/d3/d3.min.js"></script>
+    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
     <!-- endbuild -->
 
 
     <!-- build:js scripts/main.js -->
-    <script src="scripts/main.js"></script>
+    <script src="scripts/ggcharts.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
