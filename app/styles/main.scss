@@ -115,3 +115,24 @@ body {
     display: none;
   }
 }
+
+svg.chart2{
+  width: 100%;
+}
+.chart2 rect {
+  fill: steelblue;
+}
+
+.chart2 text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+.chart2 .name{
+  font-size:14px;
+}
+.chart2 .counter{
+  fill: #000;
+  font-weight: bold;
+  font-size: 12px;
+}
